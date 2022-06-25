@@ -27,11 +27,13 @@ class LoginViewModel: ObservableObject {
     
     
     //MARK: Firebase login
-    func loginUser()async throws{
+    func loginUser(useFaceID: Bool)async throws{
         print(email)
         print(password)
         let _ = try await Auth.auth().signIn(withEmail: email, password: password)
             if useFaceID{
+                self.useFaceID = useFaceID
+                
                 //MARK: Storing for future FaceID login
                 faceIDEmail = email
                 faceIDPassword = password
