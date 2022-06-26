@@ -24,9 +24,7 @@ struct Home: View {
         VStack(spacing:20){
             
             if logStatus{
-                
-                TaskHome()
-                
+
                 Text("Logged in")
                 
                 Button("Logout"){
@@ -35,6 +33,8 @@ struct Home: View {
                 }
             }
             else{
+                
+                TaskHome()
                 Text("Came as Guest!")
             }
             

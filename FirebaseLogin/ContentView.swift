@@ -23,7 +23,7 @@ struct ContentView: View {
                 LoginPage()
                 .navigationBarHidden(true)
             }
-        }
+        }.accentColor(.black)
     }
     
 }
