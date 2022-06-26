@@ -24,6 +24,9 @@ struct Home: View {
         VStack(spacing:20){
             
             if logStatus{
+                
+                TaskHome()
+                
                 Text("Logged in")
                 
                 Button("Logout"){
@@ -46,7 +49,6 @@ struct Home: View {
             
         }
         .navigationBarBackButtonHidden(true)
-        .navigationTitle("Home")
         
         
     }

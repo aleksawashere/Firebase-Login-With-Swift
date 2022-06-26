@@ -12,6 +12,7 @@ import Firebase
 @main
 struct FirebaseLoginApp: App {
     
+    let persistenceController = PersistenceController.shared
     
     init(){
         FirebaseApp.configure()//na osnovu ove linije koda i plista koji je uvezen, ostvarili smo konekciju sa Firebase-om
@@ -19,6 +20,7 @@ struct FirebaseLoginApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

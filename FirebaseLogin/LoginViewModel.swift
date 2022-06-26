@@ -29,8 +29,7 @@ class LoginViewModel: ObservableObject {
     
     //MARK: Firebase login
     func loginUser(useFaceID: Bool, email:String = "", password: String = "")async throws{
-        print(email)
-        print(password)
+     
         let _ = try await Auth.auth().signIn(withEmail: email != "" ? email : self.email, password: password != "" ? password : self.password)
         DispatchQueue.main.async {
             if useFaceID && self.faceIDEmail == ""{
@@ -42,6 +41,15 @@ class LoginViewModel: ObservableObject {
 
             }
 
+            self.logStatus = true
+        }
+
+        }
+    
+    func signUpUser(email:String = "", password: String = "")async throws{
+     
+        let _ = try await Auth.auth().createUser(withEmail: email != "" ? email : self.email, password: password != "" ? password : self.password)
+        DispatchQueue.main.async {
             self.logStatus = true
         }
 

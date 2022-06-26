@@ -74,7 +74,7 @@ struct LoginPage: View {
                     .multilineTextAlignment(.center)
                 }.frame(width: 400)
                 
-                VStack(spacing:20){
+                SwiftUI.VStack(spacing:20){
                     TextField("E-mail", text: $loginModel.email)
                     .foregroundColor(.white)
                     .textFieldStyle(.plain)
@@ -107,7 +107,7 @@ struct LoginPage: View {
                     
                     //MARK: User prompt to ask to store Login using FaceID on next time
                     if loginModel.getBioMetricStatus(){
-                        Group{
+                        SwiftUI.Group{
                             if loginModel.useFaceID{
                                 Button{
                                     //MARK: Do FaceID Action
@@ -152,7 +152,7 @@ struct LoginPage: View {
                 
                     Button{
                         
-                        Task{
+                        SwiftUI.Task{
                             do{
                                 try await loginModel.loginUser(useFaceID: useFaceID)
                             }
@@ -171,6 +171,16 @@ struct LoginPage: View {
                                     .fill(.white)
                             )
                             .foregroundStyle(.linearGradient(colors:[.red,.orange], startPoint: .topLeading, endPoint: .bottomTrailing))
+                    }
+                    
+                    NavigationLink{
+                        //MARK: Going to signup
+                        SignUpPage()
+                        
+                    } label:{
+                        Text("Nemaš nalog? Kreiraj ga!")
+                            .bold()
+                            .foregroundColor(.white)
                     }
                     
                     NavigationLink{
