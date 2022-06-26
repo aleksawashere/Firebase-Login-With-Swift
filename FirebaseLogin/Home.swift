@@ -13,6 +13,11 @@ struct Home: View {
     //Log status
     @AppStorage("log_status") var logStatus: Bool = false
     
+    //MARK: FaceID Properties
+    @AppStorage("use_face_id") var useFaceID: Bool = false
+    @AppStorage("use_face_email") var faceIDEmail: String = ""
+    @AppStorage("use_face_password") var faceIDPassword: String = ""
+    
     var body: some View {
         
         
@@ -28,6 +33,15 @@ struct Home: View {
             }
             else{
                 Text("Came as Guest!")
+            }
+            
+            if useFaceID{
+                //Clearing FaceID
+                Button("Disable FaceID login"){
+                    useFaceID = false
+                    faceIDEmail = ""
+                    faceIDPassword = ""
+                }
             }
             
         }

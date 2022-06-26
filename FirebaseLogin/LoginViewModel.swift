@@ -32,16 +32,18 @@ class LoginViewModel: ObservableObject {
         print(email)
         print(password)
         let _ = try await Auth.auth().signIn(withEmail: email != "" ? email : self.email, password: password != "" ? password : self.password)
-            if useFaceID{
+        DispatchQueue.main.async {
+            if useFaceID && self.faceIDEmail == ""{
                 self.useFaceID = useFaceID
                 
                 //MARK: Storing for future FaceID login
-                faceIDEmail = email
-                faceIDPassword = password
+                self.faceIDEmail = self.email
+                self.faceIDPassword = self.password
 
             }
 
-            logStatus = true
+            self.logStatus = true
+        }
 
         }
     
