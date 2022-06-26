@@ -106,35 +106,46 @@ struct LoginPage: View {
 
                     
                     //MARK: User prompt to ask to store Login using FaceID on next time
-                    Group{
-                        if loginModel.useFaceID{
-                            Button{
-                                //MARK: Do FaceID Action
-                            }label:{
-                                VStack(alignment: .leading, spacing: 10){
-                                    Label{
-                                        Text("Use FaceID to login into previous account")
-                                    } icon:{
-                                        Image(systemName: "faceid")
+                    if loginModel.getBioMetricStatus(){
+                        Group{
+                            if loginModel.useFaceID{
+                                Button{
+                                    //MARK: Do FaceID Action
+                                    Task{
+                                        do{
+                                            try await loginModel.authenticateUser()
+                                        }
+                                        catch{
+                                            loginModel.errorMsg = error.localizedDescription
+                                            loginModel.showError.toggle()
+                                        }
                                     }
-                                    .font(.caption)
-                                    .foregroundColor(.white)
-                                    .frame(width: 450)
-                                    
-                                    Text("Note: You can turn off it in settings")
-                                        .font(.caption2)
+                                }label:{
+                                    VStack(alignment: .leading, spacing: 10){
+                                        Label{
+                                            Text("Use FaceID to login into previous account")
+                                        } icon:{
+                                            Image(systemName: "faceid")
+                                        }
+                                        .font(.caption)
                                         .foregroundColor(.white)
                                         .frame(width: 450)
+                                        
+                                        Text("Note: You can turn off it in settings")
+                                            .font(.caption2)
+                                            .foregroundColor(.white)
+                                            .frame(width: 450)
+                                    }
                                 }
+                                
                             }
-                            
-                        }
-                        else{
-                            Toggle(isOn: $useFaceID){
-                                Text("Use FaceID to Login")
-                                    .foregroundColor(.white)
+                            else{
+                                Toggle(isOn: $useFaceID){
+                                    Text("Use FaceID to Login")
+                                        .foregroundColor(.white)
+                                }
+                                
                             }
-                            
                         }
                     }
 
