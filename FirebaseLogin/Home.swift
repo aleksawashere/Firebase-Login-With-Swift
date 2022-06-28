@@ -27,17 +27,17 @@ struct Home: View {
 
                 TaskHome()
                 
-                Text("Logged in")
+                Text("Logged in Message")
                 
                 Button("Logout"){
                     try? Auth.auth().signOut()
                     logStatus = false
                 }
             }
-            else if logStatus==false{
+            else{
                 
                 //TaskHome()
-                Text("Came as Guest!")
+                //Text("Came as Guest!")
             }
             
             if useFaceID{

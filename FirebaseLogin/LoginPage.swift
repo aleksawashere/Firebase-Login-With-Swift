@@ -70,7 +70,7 @@ struct LoginPage: View {
                 Text("Dobrodošli u aplikaciju! ")
                     .foregroundColor(Color.white)
                     .font(.system(size:65, weight: .bold, design: .rounded))
-                    .offset(y:-130)
+                    .offset(y:-100)
                     .multilineTextAlignment(.center)
                 }.frame(width: 400)
                 
@@ -160,6 +160,8 @@ struct LoginPage: View {
                                 loginModel.errorMsg = error.localizedDescription
                                 loginModel.showError.toggle()
                             }
+                            
+                           
                         }
                         
                     } label:{
