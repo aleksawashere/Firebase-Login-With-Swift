@@ -25,6 +25,8 @@ struct Home: View {
             
             if logStatus{
 
+                TaskHome()
+                
                 Text("Logged in")
                 
                 Button("Logout"){
@@ -32,9 +34,9 @@ struct Home: View {
                     logStatus = false
                 }
             }
-            else{
+            else if logStatus==false{
                 
-                TaskHome()
+                //TaskHome()
                 Text("Came as Guest!")
             }
             

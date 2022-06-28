@@ -185,7 +185,9 @@ struct LoginPage: View {
                     
                     NavigationLink{
                         //MARK: Going to application without login
-                        
+                        TaskHomeGuest()
+                            .frame(width: 400, height: 710)
+                            .navigationTitle("Režim bez naloga")
                     } label:{
                         Text("Preskoči to sada")
                             .bold()
