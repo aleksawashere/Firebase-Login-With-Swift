@@ -283,10 +283,11 @@ struct TaskHome: View {
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 45, height: 45)
                     .clipShape(Circle())
+                    .padding(15)
+                    .padding(.top)
             }
             
             //MARK: Edit button
-            EditButton()
             
         }
         .padding()
@@ -298,7 +299,7 @@ struct TaskHome: View {
 
 struct TaskHome_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        TaskHome()
             .previewInterfaceOrientation(.portrait)
     }
 }

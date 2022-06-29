@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TaskHomeGuest: View {
-    @StateObject var taskModel: TaskViewModel = TaskViewModel()
+    @StateObject var taskModel: TaskViewModelGuest = TaskViewModelGuest()
     @Namespace var animation
     
     //MARK: Core Data Context
@@ -114,7 +114,7 @@ struct TaskHomeGuest: View {
             taskModel.editTask = nil
             
         } content:{
-            NewTask()
+            NewTaskGuest()
                 .environmentObject(taskModel)
         }
     }
@@ -124,7 +124,7 @@ struct TaskHomeGuest: View {
         LazyVStack(spacing:30){
             
             //Converting object as Our Task Model
-            DynamicFilterView(dateToFilter: taskModel.currentDay){ (object: Zadatak) in
+            DynamicFilterViewGuest(dateToFilter: taskModel.currentDay){ (object: ZadatakGuest) in
                 TaskCardView(task: object)
             }
         }
@@ -136,7 +136,7 @@ struct TaskHomeGuest: View {
     
     
     //MARK: Task Card View
-    func TaskCardView(task: Zadatak)->some View{
+    func TaskCardView(task: ZadatakGuest)->some View{
         
         //MARK: Since CoreData Values will give optional data
         HStack(alignment: editButton?.wrappedValue == .active ? .center: .top, spacing:15){
@@ -290,7 +290,7 @@ struct TaskHomeGuest: View {
 
 struct TaskHomeGuest_Previews: PreviewProvider {
     static var previews: some View {
-        Home()
+        TaskHomeGuest()
             .previewInterfaceOrientation(.portrait)
     }
 }

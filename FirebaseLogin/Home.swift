@@ -17,35 +17,53 @@ struct Home: View {
     @AppStorage("use_face_id") var useFaceID: Bool = false
     @AppStorage("use_face_email") var faceIDEmail: String = ""
     @AppStorage("use_face_password") var faceIDPassword: String = ""
-    
+        
+    @Environment(\.editMode) var editButton
+
     var body: some View {
         
         
         VStack(spacing:20){
             
             if logStatus{
-
+                   
                 TaskHome()
+
                 
-                Text("Logged in Message")
-                
-                Button("Logout"){
+                Button{
                     try? Auth.auth().signOut()
                     logStatus = false
+                } label:{
+                    Text("Izloguj se 🥹")
+                        .bold()
+                        .frame(width: 200, height: 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                .fill(.linearGradient(colors:[.red,.orange], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        )
+                        .foregroundColor(.white)
+                }
+                .toolbar{
+                    EditButton()
+                        .padding(20)
                 }
             }
-            else{
-                
-                //TaskHome()
-                //Text("Came as Guest!")
-            }
-            
+
             if useFaceID{
                 //Clearing FaceID
-                Button("Disable FaceID login"){
+                Button(){
                     useFaceID = false
                     faceIDEmail = ""
                     faceIDPassword = ""
+                } label: {
+                    Text("Isključi FaceID 🩻")
+                        .bold()
+                        .frame(width: 200, height: 40)
+                        .background(
+                            RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                .fill(.linearGradient(colors:[.red,.orange], startPoint: .topLeading, endPoint: .bottomTrailing))
+                        )
+                        .foregroundColor(.white)
                 }
             }
             
