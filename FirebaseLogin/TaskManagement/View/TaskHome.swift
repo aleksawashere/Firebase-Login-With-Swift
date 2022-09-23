@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TaskHome: View {
     @StateObject var taskModel: TaskViewModel = TaskViewModel()
+    @StateObject var timerModel: TimerModel = TimerModel()
     @Namespace var animation
     
     //MARK: Core Data Context
@@ -105,7 +106,6 @@ struct TaskHome: View {
             .padding()
             .padding()
             .font(.system(size:30))
-
             ,alignment: .bottomTrailing
         )
         .sheet(isPresented: $taskModel.addNewTask){
@@ -117,6 +117,48 @@ struct TaskHome: View {
             NewTask()
                 .environmentObject(taskModel)
         }
+        
+        //MARK: More Options
+        .overlay(
+            Button(action: {
+                taskModel.moreOptions.toggle()
+            }, label: {
+                Image(systemName: "slider.horizontal.3")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(.gray, in: Circle())
+            })
+            .padding()
+            .padding()
+            .font(.system(size:30))
+            ,alignment: .bottom
+        )
+        
+        
+        //MARK: Timer Button
+        .overlay(
+            Button(action: {
+                taskModel.addNewTimer.toggle()
+            }, label: {
+                Image(systemName: "timer")
+                    .foregroundColor(.white)
+                    
+                    .padding()
+                    .background(Color("Purple"), in: Circle())
+            })
+            .padding()
+            .padding()
+            .font(.system(size:30))
+            ,alignment: .bottomLeading
+        )
+        .sheet(isPresented: $taskModel.addNewTimer){
+            
+            
+        } content:{
+            NewTimer()
+                .environmentObject(self.timerModel)
+        }
+        
     }
     
     //MARK: Tasks View

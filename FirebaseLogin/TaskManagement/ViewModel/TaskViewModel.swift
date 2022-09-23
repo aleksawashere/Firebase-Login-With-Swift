@@ -24,6 +24,12 @@ class TaskViewModel: ObservableObject{
     //MARK: New Task View
     @Published var addNewTask: Bool = false
     
+    //MARK: New Timer View
+    @Published var addNewTimer: Bool = false
+    
+    //MARK: More Options View
+    @Published var moreOptions: Bool = false
+    
     //MARK: Edit Data
     @Published var editTask: Zadatak?
     
