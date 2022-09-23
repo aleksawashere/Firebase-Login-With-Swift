@@ -105,6 +105,7 @@ struct TaskHome: View {
             })
             .padding()
             .padding()
+            .shadow(color: Color("OrangeTick"), radius: 15, x:0, y:0)
             .font(.system(size:30))
             ,alignment: .bottomTrailing
         )
@@ -118,21 +119,7 @@ struct TaskHome: View {
                 .environmentObject(taskModel)
         }
         
-        //MARK: More Options
-        .overlay(
-            Button(action: {
-                taskModel.moreOptions.toggle()
-            }, label: {
-                Image(systemName: "slider.horizontal.3")
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(.gray, in: Circle())
-            })
-            .padding()
-            .padding()
-            .font(.system(size:30))
-            ,alignment: .bottom
-        )
+        
         
         
         //MARK: Timer Button
@@ -148,8 +135,10 @@ struct TaskHome: View {
             })
             .padding()
             .padding()
+            .shadow(color: Color("Purple"), radius: 15, x:0, y:0)
             .font(.system(size:30))
             ,alignment: .bottomLeading
+            
         )
         .sheet(isPresented: $taskModel.addNewTimer){
             
@@ -379,4 +368,6 @@ extension View{
         
         return safeArea
     }
+    
+    
 }
