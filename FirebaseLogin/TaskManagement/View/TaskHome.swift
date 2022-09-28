@@ -296,7 +296,7 @@ struct TaskHome: View {
         
         HStack(spacing:10){
             
-            VStack(alignment: .leading, spacing:10){
+            VStack(alignment: .leading, spacing:5){
                 
                 Text(Date().formatted(date: .abbreviated, time:.omitted))
                     .foregroundColor(.gray)
@@ -305,6 +305,7 @@ struct TaskHome: View {
                     .font(.largeTitle.bold())
             }
             .hLeading()
+            .padding(.horizontal)
             
             Button{
                 

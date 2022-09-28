@@ -38,9 +38,6 @@ class TaskViewModel: ObservableObject{
         fetchCurrentWeek()
     }
     
-    
-   
-    
     func fetchCurrentWeek(){
         let today = Date()
         let calendar = Calendar.current

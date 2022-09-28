@@ -88,7 +88,7 @@ struct NewTimer: View {
                         }
                     } label:{
                         Image(systemName: !timerModel.isStarted ? "timer" : "stop.fill")
-                            .font(.largeTitle.bold())
+                            
                             .foregroundColor(.white)
                             .frame(width: 80, height: 80)
                             .background{
@@ -96,9 +96,26 @@ struct NewTimer: View {
                                     .fill(Color("Purple"))
                             }
                             .shadow(color: Color("Purple"), radius: 8, x:0, y:0)
+                            .font(.largeTitle.bold())
                             
                     }
+                    
+                    Button{
+                        timerModel.showStats.toggle()
+                    } label: {
+                        Text("Statistika 📊")
+                            .bold()
+                            .frame(width: 200, height: 40)
+                            .background(
+                                RoundedRectangle(cornerRadius: 30, style: .continuous)
+                                    .fill(Color("Purple"))
+                            )
+                            .foregroundColor(.white)
+                    }
+                    
+                    
                 }
+                
                 
             }
             
@@ -126,6 +143,7 @@ struct NewTimer: View {
                     .offset(y:timerModel.addNewTimer ? 20 : 250)
             }
             .animation(.easeInOut, value: timerModel.addNewTimer)
+            
         })
         .preferredColorScheme(.light)
         .onReceive(Timer.publish(every: 1, on: .main, in: .common).autoconnect()){
@@ -143,6 +161,25 @@ struct NewTimer: View {
                 timerModel.stopTimer()
             }
         }
+        
+        .overlay(content: {
+            ZStack{
+                Color.black
+                    .opacity(timerModel.showStats ? 0.5 : 0)
+                    .onTapGesture {
+                        timerModel.showStats = false
+                    }
+                    
+                
+                StatsView()
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+                    .offset(y:timerModel.showStats ? 10 : 600)
+            }
+            .animation(.easeInOut, value: timerModel.showStats)
+            .ignoresSafeArea()
+            
+        })
+        
     }
     
     
@@ -242,6 +279,74 @@ struct NewTimer: View {
                 onClick(value)
             }
         }
+    }
+    
+    //MARK: Stats Bottom Sheet
+    @ViewBuilder
+    func StatsView() -> some View{
+        VStack(spacing:0){
+            HStack{
+                VStack(alignment: .center, spacing: 0){
+                    Text("Statistika fokusiranog vremena")
+                        .font(.title)
+                        .fontWeight(.semibold)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .padding(.bottom)
+                        
+                    
+                    Label{
+                        Image(systemName: "clock.arrow.circlepath")
+                    }icon: {
+                        Text("Poslednjih 7 dana")
+                    }
+                    .font(.callout)
+                    .foregroundColor(.white)
+                }
+                
+                
+                
+            }
+            
+            HStack{
+                Text("380 min ukupno")
+                    .font(.largeTitle.bold())
+                    .foregroundColor(.white)
+                Spacer()
+                
+                Button{
+                    
+                }label: {
+                    Image(systemName: "square.and.arrow.up").font(.title2.bold())
+                        .foregroundColor(Color("Purple"))
+                    Text("Podeli prijateljima")
+                        .font(.callout)
+                        .foregroundColor(.black)
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 5)
+                }
+                .padding(.horizontal,10)
+                .background(
+                    RoundedRectangle(cornerRadius: 10).fill(Color("BG"))
+                )
+                
+            }
+            .padding(.vertical,20)
+            
+            // Bar Graph With Gestures...
+            
+            BarGraph(stats: weekStats)
+                .padding(.top,25)
+            
+            
+        }
+        .padding(35)
+        .background(
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(Color("Purple"))
+        )
+        .padding(.vertical, 20)
+        .padding()
     }
     
 }

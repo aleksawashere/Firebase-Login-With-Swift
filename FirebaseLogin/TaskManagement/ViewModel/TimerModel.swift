@@ -15,6 +15,7 @@ class TimerModel: NSObject, ObservableObject, UNUserNotificationCenterDelegate{
     @Published var timerStringValue: String = "00:00"
     @Published var isStarted: Bool = false
     @Published var addNewTimer: Bool = false
+    @Published var showStats: Bool = false
     
     @Published var hour: Int = 0
     @Published var minutes: Int = 0
